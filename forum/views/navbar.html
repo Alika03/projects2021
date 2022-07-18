@@ -1,0 +1,93 @@
+{{ define "navbar" }}
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container ">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a href="/createpost" class="pull-right visible-xs-block" style="margin:1em;">
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        Create a post
+      </a>
+      <a class="navbar-brand" href="/">
+        <i class="fa fa-comments-o"></i>
+        Forum
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            Home
+          </a>
+        </li>
+        {{ if .User.IsStatus }}
+        <li>
+          <a href="/liked">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            Liked posts
+          </a>
+        </li>
+        <li>
+          <a href="/mine">
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            My posts
+          </a>
+        </li>
+        {{end}}
+      </ul>
+      {{ if .User.IsStatus }}
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="hidden-xs" href="/createpost">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            Create a post
+           </a>
+        </li>
+        <li>
+          <a href="/activity">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+            Activity
+          </a>
+        </li>
+        <li>
+          <a href="/notification" class="notification">
+            <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+            <span>Notifications</span>
+            {{ if (gt .AmountNotification 0)}}
+            <span class="badge badge2">{{.AmountNotification}}</span>
+            {{ end}}
+          </a>
+        </li>
+          <li>
+            <a>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              {{ .User.Username }}
+            </a>
+          </li>
+          <li>
+            <a href="/logout">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              Logout
+            </a>
+          </li>
+          </ul>
+         {{ else }}
+          <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="/login">
+                  <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                  Login
+                </a>
+              </li>
+              <li><a href="/signup">Sign Up</a></li>
+          </ul>
+          {{end}}
+    </div>
+  </div>
+</div>
+{{ end }}
